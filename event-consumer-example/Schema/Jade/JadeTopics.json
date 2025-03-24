@@ -1,0 +1,8 @@
+{
+  "JadeAllEvents": [
+    { "Class": "BankModelSchema::Account" },
+	{ "Class": "BankModelSchema::Customer" },
+	{ "Class": "BankModelSchema::District" },
+	{ "Class": "BankModelSchema::Transaction" }
+  ]  
+}

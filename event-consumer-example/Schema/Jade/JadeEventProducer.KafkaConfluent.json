@@ -1,0 +1,63 @@
+{
+    "Modules": {
+        "Reader": "File",
+        "Sender": "Kafka",        
+        "TopicManager": "File",
+		"StorageProvider" : "File",
+        "Serializer": "Json",
+		"SchemaGenerator": "Json",
+        "SchemaRegistry": "None"
+    },
+    "Configurations": {
+		"FileReader": {
+            "CaptureDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture",
+			"UndeliverableDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture\\undeliverable",
+            "RunContinuously": true,
+            "Delay": 200
+        },
+		
+		"FileTopicManager": {
+            "TopicFileName": "C:\\JadeEventStreamingDemo\\Configuration\\JadeTopics.json"
+        },
+		
+		"Catalog" : {
+            "CatalogDirectory": "C:\\JadeEventStreamingDemo\\system\\journals"
+        },
+		
+		"KafkaSender": {
+            "Properties": {
+                "bootstrap.servers": "kafka-cluster-name.geolocation.cloudprovider.confluent.cloud:9092",
+                "security.protocol": "SASL_SSL",
+				"sasl.mechanisms" : "PLAIN",
+				"sasl.username" : "ApiKeyName",
+				"sasl.password" : "ApiKeyValue"				
+            }
+        },        
+		
+		"FileStorageProvider": {
+			"RootDirectory": "C:\\JadeEventStreamingDemo\\EventCaptureBlobs"
+		},
+		
+		"SizeThresholds": {
+			"SlobThresholdBytes": "500KB",
+			"BlobThresholdBytes": "500KB"
+		},                
+               
+		"SchemaCache": {
+            "CacheRootDirectory": "C:\\JadeEventStreamingDemo\\SchemaCacheRootDirectory"
+        },
+		
+		"Loggers": 
+		[			
+			{
+				"MaxLevel" : "Info",
+				"Sink" : "File",
+				"LogFileName": "C:\\JadeEventStreamingDemo\\Logs\\Producer_${ProducerName}.log"            
+			},
+			{            
+				"MaxLevel" : "Warn",
+				"Sink" : "Console"
+			}
+		]
+    }
+}

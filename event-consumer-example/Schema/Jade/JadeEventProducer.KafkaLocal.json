@@ -1,0 +1,60 @@
+{
+    "Modules": {
+        "Reader": "File",
+        "Sender": "Kafka",        
+        "TopicManager": "File",
+		"StorageProvider" : "File",
+        "Serializer": "Json",
+		"SchemaGenerator": "Json",
+        "SchemaRegistry": "None"
+    },
+    "Configurations": {
+		"FileReader": {
+            "CaptureDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture",
+			"UndeliverableDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture\\undeliverable",
+            "RunContinuously": true,
+            "Delay": 200
+        },
+		
+		"FileTopicManager": {
+            "TopicFileName": "C:\\JadeEventStreamingDemo\\Configuration\\JadeTopics.json"
+        },
+		
+		"Catalog" : {
+            "CatalogDirectory": "C:\\JadeEventStreamingDemo\\system\\journals"
+        },
+		
+		"KafkaSender": {
+            "Properties": {
+                "bootstrap.servers": "localhost:9092",
+                "security.protocol": "plaintext"
+            }
+        },        
+		
+		"FileStorageProvider": {
+			"RootDirectory": "C:\\JadeEventStreamingDemo\\EventCaptureBlobs"
+		},
+		
+		"SizeThresholds": {
+			"SlobThresholdBytes": "500KB",
+			"BlobThresholdBytes": "500KB"
+		},                
+               
+		"SchemaCache": {
+            "CacheRootDirectory": "C:\\JadeEventStreamingDemo\\SchemaCacheRootDirectory"
+        },
+		
+		"Loggers": 
+		[			
+			{
+				"MaxLevel" : "Info",
+				"Sink" : "File",
+				"LogFileName": "C:\\JadeEventStreamingDemo\\Logs\\Producer_${ProducerName}.log"            
+			},
+			{            
+				"MaxLevel" : "Warn",
+				"Sink" : "Console"
+			}
+		]
+    }
+}

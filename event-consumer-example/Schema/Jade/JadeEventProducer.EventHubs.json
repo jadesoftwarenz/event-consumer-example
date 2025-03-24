@@ -1,0 +1,62 @@
+{
+    "Modules": {
+        "Reader": "File",
+        "Sender": "Azure",        
+        "TopicManager": "File",
+		"Serializer": "Json",
+		"StorageProvider" : "File",        
+		"SchemaGenerator": "Json",
+        "SchemaRegistry": "None"
+    },
+    "Configurations": {
+        
+		"FileReader": {
+            "CaptureDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture",
+			"UndeliverableDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture\\undeliverable",
+            "RunContinuously": true,
+            "Delay": 200
+        },
+		
+		"FileTopicManager": {
+            "TopicFileName": "C:\\JadeEventStreamingDemo\\Configuration\\JadeTopics.json"
+        },
+		
+		"Catalog" : {
+            "CatalogDirectory": "C:\\JadeEventStreamingDemo\\system\\journals"
+        },
+        				
+		"AzureSender": {
+            "EventHubsNamespace": "eventhubs-namespace.servicebus.windows.net",
+            "Authentication": {
+                "Type": "ConnectionString",
+                "ConnectionString": "Endpoint=sb://eventhubs-namespace.servicebus.windows.net/;SharedAccessKeyName=SharedAccessKey;SharedAccessKey=SharedAccessKeyValue" 
+            }
+        },				
+		
+		"FileStorageProvider": {
+			"RootDirectory": "C:\\JadeEventStreamingDemo\\EventCaptureBlobs"
+		},
+		
+		"SizeThresholds": {
+			"SlobThresholdBytes": "500KB",
+			"BlobThresholdBytes": "500KB"
+		},	        		
+        
+		"SchemaCache": {
+            "CacheRootDirectory": "C:\\JadeEventStreamingDemo\\SchemaCacheRootDirectory"
+        },			
+		
+		"Loggers": 
+		[			
+			{
+				"MaxLevel" : "Info",
+				"Sink" : "File",
+				"LogFileName": "C:\\JadeEventStreamingDemo\\Logs\\Producer_${ProducerName}.log"            
+			},
+			{            
+				"MaxLevel" : "Warn",
+				"Sink" : "Console"
+			}
+		]				
+    }
+}

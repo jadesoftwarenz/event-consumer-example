@@ -1,0 +1,88 @@
+{
+    "Modules": {
+        "Reader": "File",
+        "Sender": "Azure",        
+        "TopicManager": "File",
+		"Serializer": "Json",
+		"StorageProvider" : "AzureBlobStorage",        
+		"SchemaGenerator": "Json",
+        "SchemaRegistry": "Azure"
+    },
+    "Configurations": {
+        
+		"FileReader": {
+            "CaptureDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture",
+			"UndeliverableDirectory": "C:\\JadeEventStreamingDemo\\ChangeCapture\\undeliverable",
+            "RunContinuously": true,
+            "Delay": 200
+        },
+		
+		"FileTopicManager": {
+            "TopicFileName": "C:\\JadeEventStreamingDemo\\Configuration\\JadeTopics.json"
+        },
+		
+		"Catalog" : {
+            "CatalogDirectory": "C:\\JadeEventStreamingDemo\\system\\journals"
+        },
+        				
+		"AzureSender": {
+            "EventHubsNamespace": "eventhubs-namespace.servicebus.windows.net",
+            "Authentication": {
+                "Type": "ConnectionString",
+                "ConnectionString": "Endpoint=sb://eventhubs-namespace.servicebus.windows.net/;SharedAccessKeyName=SharedAccessKey;SharedAccessKey=SharedAccessKeyValue" 
+            }
+        },
+				
+		"AzureBlobStorageProvider": {			
+			"ContainerName": "jade-blob-container",
+			"StagingDirectory" : "C:\\JadeEventStreamingDemo\\BlobStaging",
+			"BlobPrefix": "events",
+			
+			"Authentication": {
+                "Type": "ConnectionString",
+                "ConnectionString":"DefaultEndpointsProtocol=https;AccountName=AzureBlobStorageAccountName;AccountKey=AzureBlobStorageAccountKey;EndpointSuffix=core.windows.net" 
+            }
+		},
+		
+		"SizeThresholds": {
+			"SlobThresholdBytes": "500KB",
+			"BlobThresholdBytes": "500KB"
+		},
+	            		
+        
+		"SchemaCache": {
+            "CacheRootDirectory": "C:\\JadeEventStreamingDemo\\SchemaCacheRootDirectory"
+        },
+		
+		"AzureSchemaRegistry": {
+            "Endpoint":"https://eventhubs-namespace.servicebus.windows.net",
+			"EventhubNamespace":"eventhubs-namespace",
+			"SchemaGroup":"eventhubs-schema-group",
+			"SchemaFormat": "Json",
+			"HttpLogging": true,
+			"RetryOptions": {
+				"MaxRetries": 5,
+				"RetryDelay": 900,
+				"MaxRetryDelay": 30000,
+				"StatusCodes": [408, 409, 500,502, 503, 504]
+			},
+			"Authentication":{
+				"Type":	 "AzureLogin" 
+			}
+        },	
+		
+		"Loggers": 
+		[			
+			{
+				"MaxLevel" : "Info",
+				"Sink" : "File",
+				"LogFileName": "C:\\JadeEventStreamingDemo\\Logs\\Producer_${ProducerName}.log"            
+			},
+			{            
+				"MaxLevel" : "Warn",
+				"Sink" : "Console"
+			}
+		]
+				
+    }
+}
