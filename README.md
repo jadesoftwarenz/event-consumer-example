@@ -67,7 +67,7 @@ No setup required, events will be logged to the application's Console.
 **Run JadeEventProducer.exe JadeEventProducer.json *YourChosenProducerName*** - Note: you can run multiple copies.  Give each copy a unique name.
 
 For more information see:
-https://secure.jadeworld.com/developer-centre/Jade2022/OnlineDocumentation/#resources/eventstreaming
+https://secure.jadeworld.com/developer-centre/Jade2022/OnlineDocumentation/#resources/eventstreaming/chapter1/ch1overview.htm?
 
 
 ## 6. Checks before starting the Consumer application
